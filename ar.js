@@ -397,7 +397,7 @@ ArWriter.prototype.writeEntries = function(entries, callback) {
 										if(rfErr) {
 											self.emit("error", rfErr);
 										} else {
-											var currName = path.basename(curr) + "/";
+											var currName = path.basename(curr);// + "/";
 											var currSize = currStat.size;
 											if(self.gnu && self.gnuMap[currName]) {
 												currName = self.gnuMap[currName];
@@ -408,7 +408,7 @@ ArWriter.prototype.writeEntries = function(entries, callback) {
 
 											}
 											var currHeader = buildHeader(currName,
-													(currStat.mtime.getTime()/1000) + "",
+													Math.round((currStat.mtime.getTime()/1000)) + "",
 													((self.uid!==undefined) ? self.uid : currStat.uid) + "",
 													((self.gid!==undefined) ? self.gid : currStat.gid) + "",
 													((self.mode!==undefined) ? self.mode : currStat.mode).toString(8),
